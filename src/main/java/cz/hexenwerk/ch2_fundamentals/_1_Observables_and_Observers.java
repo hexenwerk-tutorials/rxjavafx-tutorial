@@ -1,4 +1,4 @@
-package cz.hexenwerk.ch2;
+package cz.hexenwerk.ch2_fundamentals;
 
 import io.reactivex.Observable;
 import io.reactivex.observers.ResourceObserver;

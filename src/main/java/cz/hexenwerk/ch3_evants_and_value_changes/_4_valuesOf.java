@@ -1,4 +1,4 @@
-package cz.hexenwerk.ch3;
+package cz.hexenwerk.ch3_evants_and_value_changes;
 
 import io.reactivex.rxjavafx.observables.JavaFxObservable;
 import javafx.application.Application;

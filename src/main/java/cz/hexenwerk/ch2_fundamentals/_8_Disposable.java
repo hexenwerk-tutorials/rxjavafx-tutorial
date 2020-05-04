@@ -1,4 +1,4 @@
-package cz.hexenwerk.ch2;
+package cz.hexenwerk.ch2_fundamentals;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.rxjavafx.observables.JavaFxObservable;

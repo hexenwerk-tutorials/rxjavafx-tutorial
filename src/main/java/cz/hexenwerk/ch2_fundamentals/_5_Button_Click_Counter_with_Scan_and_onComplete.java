@@ -1,4 +1,4 @@
-package cz.hexenwerk.ch2;
+package cz.hexenwerk.ch2_fundamentals;
 
 import io.reactivex.rxjavafx.observables.JavaFxObservable;
 import javafx.application.Application;
@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public final class _4_Button_Click_Counter_with_Scan extends Application
+public final class _5_Button_Click_Counter_with_Scan_and_onComplete extends Application
 {
 
     @Override
@@ -17,14 +17,19 @@ public final class _4_Button_Click_Counter_with_Scan extends Application
         VBox vBox = new VBox();
         Button button = new Button("Press Me");
         Label countLabel = new Label("0");
+        Label doneLabel = new Label("");
 
         JavaFxObservable.actionEventsOf(button)
                 .map(ae -> 1)
                 .scan(0, (x, y) -> x + y)
-                .subscribe(clickCount -> countLabel.setText(clickCount.toString()));
+                .take(5)
+                .subscribe(
+                        clickCount -> countLabel.setText(clickCount.toString()),
+                        Throwable::printStackTrace,
+                        () -> doneLabel.setText("Done!")
+                );
 
-        vBox.getChildren().add(countLabel);
-        vBox.getChildren().add(button);
+        vBox.getChildren().addAll(countLabel, doneLabel, button);
         stage.setScene(new Scene(vBox));
         stage.show();
     }

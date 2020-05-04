@@ -1,4 +1,4 @@
-package cz.hexenwerk.ch4;
+package cz.hexenwerk.ch4_collections;
 
 import io.reactivex.Observable;
 import io.reactivex.rxjavafx.observables.JavaFxObservable;

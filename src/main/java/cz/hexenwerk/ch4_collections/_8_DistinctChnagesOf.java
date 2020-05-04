@@ -1,4 +1,4 @@
-package cz.hexenwerk.ch4;
+package cz.hexenwerk.ch4_collections;
 
 import io.reactivex.rxjavafx.observables.JavaFxObservable;
 import io.reactivex.rxjavafx.sources.Flag;
@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public final class _9_DistinctChangesOf extends Application
+public final class _8_DistinctChnagesOf extends Application
 {
 
     @Override
@@ -28,13 +28,13 @@ public final class _9_DistinctChangesOf extends Application
         Label header2 = new Label("DISTINCT VALUES");
         ListView<String> distinctListView = new ListView<>();
 
-        JavaFxObservable.distinctChangesOf(listView.getItems(), s -> s.substring(0, 1))
+        JavaFxObservable.distinctChangesOf(listView.getItems())
                 .subscribe((ListChange<String> c) ->
                         {
                             if (c.getFlag().equals(Flag.ADDED))
-                                distinctListView.getItems().add(c.getValue().substring(0, 1));
+                                distinctListView.getItems().add(c.getValue());
                             else
-                                distinctListView.getItems().remove(c.getValue().substring(0, 1));
+                                distinctListView.getItems().remove(c.getValue());
                         }
                 );
 

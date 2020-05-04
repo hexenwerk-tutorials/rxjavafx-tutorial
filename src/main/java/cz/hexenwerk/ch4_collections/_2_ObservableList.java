@@ -1,22 +1,20 @@
-package cz.hexenwerk.ch4;
+package cz.hexenwerk.ch4_collections;
 
 import io.reactivex.Observable;
 import io.reactivex.rxjavafx.observables.JavaFxObservable;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.util.List;
-
-public final class _1_ObservableList extends Application
+public final class _2_ObservableList extends Application
 {
     @Override
     public void start(Stage stage) throws Exception
@@ -25,24 +23,25 @@ public final class _1_ObservableList extends Application
 
         ObservableList<String> values = FXCollections.observableArrayList("Alpha", "Beta", "Gamma");
 
-        ListView<Integer> distinctLengthsListView = new ListView<>();
+        Label distinctLengthsConcatLabel = new Label();
+        distinctLengthsConcatLabel.setTextFill(Color.RED);
 
         JavaFxObservable.emitOnChanged(values)
-                .flatMapSingle((ObservableList<String> list) ->
+                .flatMapSingle(list ->
                         Observable.fromIterable(list)
                                 .map(String::length)
                                 .distinct()
-                                .toList())
-                .subscribe((List<Integer> lengths) ->
-                        distinctLengthsListView.getItems().setAll(lengths));
+                                .reduce("", (x, y) -> x + (x.equals("") ? "" : "|") + y)
+                ).subscribe(distinctLengthsConcatLabel::setText)
+        ;
 
         TextField inputField = new TextField();
         Button addButton = new Button("ADD");
 
         JavaFxObservable.actionEventsOf(addButton)
-                .map((ActionEvent ae) -> inputField.getText())
-                .filter((String s) -> s != null && !s.trim().isEmpty())
-                .subscribe((String s) ->
+                .map(ae -> inputField.getText())
+                .filter(s -> s != null && !s.trim().isEmpty())
+                .subscribe(s ->
                         {
                             values.add(s);
                             inputField.clear();
@@ -51,9 +50,8 @@ public final class _1_ObservableList extends Application
 
         root.getChildren().addAll(
                 new Label("VALUES"), new ListView<String>(values),
-                new Label("DISTINCT LENGTHS"), distinctLengthsListView,
-                inputField, addButton
-        );
+                new Label("DISTINCT LENGTHS"), distinctLengthsConcatLabel,
+                inputField, addButton);
         stage.setScene(new Scene(root));
         stage.show();
     }
