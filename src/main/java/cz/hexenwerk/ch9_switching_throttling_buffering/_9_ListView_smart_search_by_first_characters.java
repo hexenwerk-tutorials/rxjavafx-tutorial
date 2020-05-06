@@ -1,4 +1,4 @@
-package cz.hexenwerk;
+package cz.hexenwerk.ch9_switching_throttling_buffering;
 
 import io.reactivex.Observable;
 import io.reactivex.rxjavafx.observables.JavaFxObservable;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public final class MyApp extends Application
+public final class _9_ListView_smart_search_by_first_characters extends Application
 {
 
     @Override
