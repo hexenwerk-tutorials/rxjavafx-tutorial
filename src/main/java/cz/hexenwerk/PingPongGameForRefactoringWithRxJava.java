@@ -16,7 +16,7 @@ import javafx.util.Duration;
 import java.util.Random;
 
 /* TODO:jako to be refactored */
-public class PingPongGame extends Application
+public class PingPongGameForRefactoringWithRxJava extends Application
 {
 
     //variable
